@@ -1,0 +1,33 @@
+//PROG8410 Assignment04
+//Fei Yun
+//8680643
+//2020-11-19
+
+
+//1
+create keyspace DVDFY with replication={'class':'SimpleStrategy','replication_factor':3};
+//2
+use DVDFY;
+//here we create partition key as genre and cluster key as price and title
+create table DVDTableFY(title text,actors list<text>,price decimal,genre text,release_date text, primary key (genre,price,title));
+//3,4,5
+insert into DVDTableFY(title,actors,price,genre,release_date) values ('naruto',[ 'Naruto Uzumaki', 'Sasuke Uchiha'],39.95,'Animation','2005-5-1');
+insert into DVDTableFY(title,actors,price,genre,release_date) values ('death note',['L','light Yagami','Misa Amane'],35.05,'Animation','2001-10-15');
+insert into DVDTableFY(title,actors,price,genre,release_date) values ('Queens Gambit',['Anya Taylor','Bill Camp'],19.99,'Drama','2020-10-19');
+insert into DVDTableFY(title,actors,price,genre,release_date) values ('Spider man',['Tobby Maque'],9.19,'Acton','1999-11-22');
+insert into DVDTableFY(title,actors,price,genre,release_date) values ('Avengers',['Robbert','Elizabeth'],13.99,'Fantasy','2018-6-17');
+//6
+select title,price,genre from DVDTableFY;
+
+select title, price from DVDTableFY where genre='Animation' order by price DESC ;
+
+select title, price from DVDTableFY where genre='Animation';
+
+select distinct count(genre) from DVDTableFY;
+
+select genre,avg(price) from DVDTableFY group by genre;
+
+select title,actors from DVDTableFY;
+
+
+
